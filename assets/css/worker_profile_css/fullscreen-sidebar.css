@@ -1,0 +1,232 @@
+/* fullscreen-sidebar.css */
+
+/* Ümumi tam ekran */
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ana container */
+.h-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header sabit */
+header {
+    flex-shrink: 0;
+}
+
+/* Ana content - qalan yeri tutur */
+.flex-1.min-h-0 {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Sidebar daralmış vəziyyət - SADƏCƏ İKONKALAR */
+.sidebar-collapsed {
+    width: 80px !important;
+}
+
+.sidebar-collapsed .sidebar-title {
+    display: none;
+}
+
+.sidebar-collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar-collapsed .sidebar-link {
+    justify-content: center;
+    padding: 12px 0 !important;
+}
+
+.sidebar-collapsed .sidebar-link i {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+/* Mishka yaxınlaşanda sidebar böyüsün */
+#mainSidebar:hover {
+    width: 260px !important;
+    transition: width 0.3s ease;
+    z-index: 10;
+}
+
+#mainSidebar:hover .sidebar-title {
+    display: block;
+}
+
+#mainSidebar:hover .sidebar-text {
+    display: inline-block;
+}
+
+#mainSidebar:hover .sidebar-link {
+    justify-content: flex-start;
+    padding: 12px 16px !important;
+}
+
+/* Profil hissəsinin scrollu */
+#profileContent, #filesContent {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+#profileContent::-webkit-scrollbar,
+#filesContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+#profileContent::-webkit-scrollbar-track,
+#filesContent::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#profileContent::-webkit-scrollbar-thumb,
+#filesContent::-webkit-scrollbar-thumb {
+    background: #7DB6FF;
+    border-radius: 10px;
+}
+
+/* Fayllarım bölməsi */
+#filesSection {
+    height: 100%;
+}
+
+/* Modal tam ekran */
+.companies-modal .max-w-6xl {
+    max-width: 95% !important;
+    width: 95% !important;
+    height: 90vh !important;
+}
+/* Sidebar scroll styling */
+#sidebarContent {
+    scrollbar-width: thin;
+    scrollbar-color: #7DB6FF #EAF3FF;
+}
+
+#sidebarContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+#sidebarContent::-webkit-scrollbar-track {
+    background: #EAF3FF;
+    border-radius: 10px;
+}
+
+#sidebarContent::-webkit-scrollbar-thumb {
+    background: #7DB6FF;
+    border-radius: 10px;
+}
+
+#sidebarContent::-webkit-scrollbar-thumb:hover {
+    background: #6aa9ff;
+}
+
+/* fullscreen-sidebar.css */
+
+#taskManagerSection {
+    display: block;
+    height: calc(100vh - 70px);  /* -70px + 100vh = 100vh - 70px */
+    width: 100%;
+}
+
+/* Və ya daha specifik selector */
+section#taskManagerSection {
+    display: block;
+    height: calc(100vh - 70px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #mainContainer {
+        flex-direction: column;
+    }
+
+    #mainSidebar {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .sidebar-collapsed {
+        width: 100% !important;
+        height: 60px !important;
+        overflow: hidden;
+    }
+
+    #mainSidebar:hover {
+        width: 100% !important;
+        height: auto !important;
+    }
+    /* Sizin CSS-iniz - heç bir ID dəyişmir */
+        .sidebar-collapsed .sidebar-title,
+        .sidebar-collapsed .sidebar-text {
+            display: none;
+        }
+        .sidebar-collapsed .sidebar-link {
+            justify-content: center;
+            padding: 12px 0 !important;
+        }
+        #mainSidebar {
+            width: 260px;
+            transition: all 0.3s ease;
+        }
+        #mainSidebar.sidebar-collapsed {
+            width: 80px;
+        }
+        #mainSidebar:hover {
+            width: 260px !important;
+        }
+        #mainSidebar:hover .sidebar-title,
+        #mainSidebar:hover .sidebar-text {
+            display: block;
+        }
+        #mainSidebar:hover .sidebar-link {
+            justify-content: flex-start;
+            padding: 12px 16px !important;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        input[readonly] {
+            background-color: #f8fafc;
+            cursor: not-allowed;
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(64, 129, 255, 0.2);
+        }
+        .welcome-text {
+            background: linear-gradient(135deg, #7DB6FF 0%, #4A90E2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        /* Şəkil yükləmə sahələri üçün */
+        #profileImageUpload, #companyImageUpload {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        #profileImageUpload img, #companyImageUpload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+}
+
