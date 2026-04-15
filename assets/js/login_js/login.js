@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // === LOGIN FUNCTIONS ===
-    const API_BASE = "/proxy.php";
+    const API_BASE = "http://vps.guvenfinans.az:8008";
     const loginForm = document.getElementById('loginForm');
     const statusEl = document.getElementById('authStatus');
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // 1. User məlumatlarını al
             console.log('📥 1/6 User məlumatları yüklənir...');
-            const userRes = await fetch('/proxy.php/api/v1/auth/me', { headers });
+            const userRes = await fetch('http://vps.guvenfinans.az:8008/api/v1/auth/me', { headers });
             if (userRes.ok) {
                 const userData = await userRes.json();
                 const user = userData.user || userData;
@@ -58,26 +58,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (companyCode) {
                     // 2. Sub-companies
                     console.log('📥 2/6 Sub-companies yüklənir...');
-                    await fetch(`/proxy.php/api/v1/companies/${companyCode}/sub-companies`, { headers });
+                    await fetch(`http://vps.guvenfinans.az:8008/api/v1/companies/${companyCode}/sub-companies`, { headers });
 
                     // 3. Departments
                     console.log('📥 3/6 Departments yüklənir...');
-                    await fetch(`/proxy.php/api/v1/departments/company-code/${companyCode}`, { headers });
+                    await fetch(`http://vps.guvenfinans.az:8008/api/v1/departments/company-code/${companyCode}`, { headers });
 
                     // 4. Employees
                     console.log('📥 4/6 Employees yüklənir...');
-                    await fetch(`/proxy.php/api/v1/users/company/${companyCode}`, { headers });
+                    await fetch(`http://vps.guvenfinans.az:8008/api/v1/users/company/${companyCode}`, { headers });
 
                     // 5. Work types
                     console.log('📥 5/6 Work types yüklənir...');
                     const companyId = user.company_id || user.user?.company_id;
                     if (companyId) {
-                        await fetch(`/proxy.php/api/v1/worktypes/company/${companyId}`, { headers });
+                        await fetch(`http://vps.guvenfinans.az:8008/api/v1/worktypes/company/${companyId}`, { headers });
                     }
 
                     // 6. Active tasks
                     console.log('📥 6/6 Active tasks yüklənir...');
-                    await fetch('/proxy.php/api/v1/tasks/detailed?page=1&limit=100&status=pending,in_progress,waiting,overdue,pending_approval', { headers });
+                    await fetch('http://vps.guvenfinans.az:8008/api/v1/tasks/detailed?page=1&limit=100&status=pending,in_progress,waiting,overdue,pending_approval', { headers });
                 }
             }
 
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('🔑 Login attempt for:', payload.username);
 
             try {
-                const res = await fetch(`/proxy.php/api/v1/auth/login`, {
+                const res = await fetch(`http://vps.guvenfinans.az:8008/api/v1/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
