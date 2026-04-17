@@ -49,22 +49,22 @@ header {
     font-size: 1.25rem;
 }
 
-/* Mishka yaxınlaşanda sidebar böyüsün */
-#mainSidebar:hover {
+/* Sidebar yalnız collapsed vəziyyətdə hover ediləndə böyüsün */
+#mainSidebar.sidebar-collapsed:hover {
     width: 260px !important;
     transition: width 0.3s ease;
     z-index: 10;
 }
 
-#mainSidebar:hover .sidebar-title {
+#mainSidebar.sidebar-collapsed:hover .sidebar-title {
     display: block;
 }
 
-#mainSidebar:hover .sidebar-text {
+#mainSidebar.sidebar-collapsed:hover .sidebar-text {
     display: inline-block;
 }
 
-#mainSidebar:hover .sidebar-link {
+#mainSidebar.sidebar-collapsed:hover .sidebar-link {
     justify-content: flex-start;
     padding: 12px 16px !important;
 }
@@ -159,7 +159,7 @@ section#taskManagerSection {
         overflow: hidden;
     }
 
-    #mainSidebar:hover {
+    #mainSidebar.sidebar-collapsed:hover {
         width: 100% !important;
         height: auto !important;
     }
@@ -179,14 +179,14 @@ section#taskManagerSection {
         #mainSidebar.sidebar-collapsed {
             width: 80px;
         }
-        #mainSidebar:hover {
+        #mainSidebar.sidebar-collapsed:hover {
             width: 260px !important;
         }
-        #mainSidebar:hover .sidebar-title,
-        #mainSidebar:hover .sidebar-text {
+        #mainSidebar.sidebar-collapsed:hover .sidebar-title,
+        #mainSidebar.sidebar-collapsed:hover .sidebar-text {
             display: block;
         }
-        #mainSidebar:hover .sidebar-link {
+        #mainSidebar.sidebar-collapsed:hover .sidebar-link {
             justify-content: flex-start;
             padding: 12px 16px !important;
         }
@@ -229,4 +229,3 @@ section#taskManagerSection {
             border-radius: 1rem;
         }
 }
-
