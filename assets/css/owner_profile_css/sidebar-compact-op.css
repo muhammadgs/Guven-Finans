@@ -116,6 +116,33 @@ a#profileBtn.sidebar-link.bg-brand-soft.text-brand-blue i {
     font-size: 1.3rem !important;
 }
 
+.compact-sidebar:not(:hover) #settingsMainBtn {
+    padding: 10px 8px !important;
+    justify-content: center !important;
+}
+
+.compact-sidebar:not(:hover) #settingsMainBtn > .flex.items-center.gap-3 {
+    width: 100% !important;
+    justify-content: center !important;
+}
+
+.compact-sidebar:not(:hover) #settingsMainBtn .text-left,
+.compact-sidebar:not(:hover) #settingsMainBtn #settingsArrow,
+.compact-sidebar:not(:hover) #settingsMainBtn > .flex.items-center.gap-2 {
+    display: none !important;
+}
+
+.compact-sidebar:not(:hover) #settingsMainBtn .h-10.w-10.rounded-full {
+    width: 40px !important;
+    height: 40px !important;
+    flex-shrink: 0 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+}
+
 .compact-sidebar:hover nav a.sidebar-link {
     padding: 12px 16px !important;
     justify-content: flex-start !important;
