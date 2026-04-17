@@ -96,6 +96,33 @@ header {
     padding: 12px 16px !important;
 }
 
+#mainSidebar.sidebar-collapsed:hover #settingsMainBtn {
+    padding: 12px 14px !important;
+    justify-content: space-between !important;
+    overflow: visible !important;
+}
+
+#mainSidebar.sidebar-collapsed:hover #settingsMainBtn > .flex.items-center.gap-3 {
+    width: auto !important;
+    justify-content: flex-start !important;
+    min-width: 0 !important;
+    gap: 0.75rem !important;
+}
+
+#mainSidebar.sidebar-collapsed:hover #settingsMainBtn .text-left {
+    display: block !important;
+}
+
+#mainSidebar.sidebar-collapsed:hover #settingsMainBtn > .flex.items-center.gap-2 {
+    display: flex !important;
+}
+
+#mainSidebar.sidebar-collapsed:hover #settingsMainBtn .h-10.w-10.rounded-full {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1rem !important;
+}
+
 /* Profil hissəsinin scrollu */
 #profileContent, #filesContent {
     height: 100%;
