@@ -154,6 +154,13 @@ a#profileBtn.sidebar-link.bg-brand-soft.text-brand-blue i {
     display: inline-block !important;
 }
 
+.compact-sidebar:hover #settingsMainBtn .text-left p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 190px !important;
+}
+
 /* Tooltip */
 .compact-sidebar:not(:hover) nav a.sidebar-link {
     position: relative !important;

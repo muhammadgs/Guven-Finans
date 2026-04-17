@@ -51,7 +51,7 @@ header {
 
 /* Mishka yaxınlaşanda sidebar böyüsün */
 #mainSidebar:hover {
-    width: 260px !important;
+    width: 320px !important;
     transition: width 0.3s ease;
     z-index: 10;
 }
@@ -229,4 +229,3 @@ section#taskManagerSection {
             border-radius: 1rem;
         }
 }
-
