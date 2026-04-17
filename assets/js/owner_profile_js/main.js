@@ -642,9 +642,9 @@ class ProfileApp {
                 });
                 newProfileBtn.classList.add('bg-brand-soft', 'text-brand-blue');
 
-                // SİDEBAR-I GENİŞLƏT
+                // SİDEBAR-I DAR SAXLA
                 const sidebar = document.getElementById('mainSidebar');
-                if (sidebar) sidebar.classList.remove('sidebar-collapsed');
+                if (sidebar) sidebar.classList.add('sidebar-collapsed');
             });
 
             console.log('✅ Profil düyməsi bağlandı');

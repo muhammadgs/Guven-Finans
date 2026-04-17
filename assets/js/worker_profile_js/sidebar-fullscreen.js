@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const profileContent = document.getElementById('profileContent');
     const sidebarLinks = document.querySelectorAll('[data-sidebar-item]');
 
-    // Sidebar əvvəlcə açıq olsun
-    sidebar.classList.remove('sidebar-collapsed');
+    // Sidebar əvvəlcə dar (ikon rejimi) olsun
+    sidebar.classList.add('sidebar-collapsed');
 
     // Service-lərin hazır olmasını gözlə
     function waitForService(serviceName, callback, maxAttempts = 20) {
