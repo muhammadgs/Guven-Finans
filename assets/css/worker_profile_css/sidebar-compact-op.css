@@ -2,103 +2,105 @@
 
 /* İdarəetmə başlığı */
 h2.sidebar-title.text-sm.font-semibold.text-slate-400 {
-    color: #EF4444 !important;
-    font-size: 0.85rem !important;
+    color: #5f7aa6 !important;
+    font-size: 0.8rem !important;
     font-weight: 700 !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
-    margin-bottom: 1rem !important;
-    padding-left: 0.5rem !important;
-    border-left: 3px solid #EF4444 !important;
+    margin: 1.15rem 0 0.95rem !important;
+    padding-left: 0.75rem !important;
+    border-left: 3px solid #84afff !important;
+    line-height: 1 !important;
 }
 
 /* ===== BÜTÜN LİNKLƏR ÜÇÜN ÜMUMİ STİLLƏR ===== */
 nav a.sidebar-link {
-    color: #1F2937 !important;
-    background: transparent !important;
+    color: #24324b !important;
+    background: rgba(255, 255, 255, 0.58) !important;
     font-weight: 600 !important;
-    transition: all 0.2s ease !important;
-    border-radius: 12px !important;
-    margin: 2px 0 !important;
-    border-left: 3px solid transparent !important;
+    transition: all 0.25s ease !important;
+    border-radius: 14px !important;
+    margin: 4px 0 !important;
+    border: 1px solid rgba(172, 198, 245, 0.26) !important;
+    box-shadow: 0 6px 16px rgba(102, 140, 219, 0.08) !important;
+    backdrop-filter: blur(5px) !important;
 }
 
 /* Hover effekti */
 nav a.sidebar-link:hover {
-    background: #EFF6FF !important;
-    color: #3B82F6 !important;
-    transform: translateX(5px) !important;
+    background: linear-gradient(120deg, #f3f8ff 0%, #ebf3ff 100%) !important;
+    color: #3f73db !important;
+    border-color: #c8dcff !important;
+    box-shadow: 0 12px 25px rgba(96, 140, 226, 0.16) !important;
+    transform: translateX(4px) scale(1.01) !important;
 }
 
 /* İkonlar */
 nav a.sidebar-link i {
-    color: #6B7280 !important;
-    font-size: 1.2rem !important;
+    color: #6f819d !important;
+    font-size: 1.12rem !important;
     width: 1.5rem !important;
     text-align: center !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.25s ease !important;
 }
 
 /* Hoverda ikon */
 nav a.sidebar-link:hover i {
-    color: #3B82F6 !important;
-    transform: scale(1.1) !important;
+    color: #3f73db !important;
+    transform: scale(1.08) !important;
 }
 
 /* ===== GÜCLƏNDİRİLMİŞ AKTİV LİNK STİLLƏRİ ===== */
 nav a.sidebar-link.active,
 nav a.sidebar-link.bg-brand-soft.text-brand-blue {
-    background: #DBEAFE !important;  /* Daha tünd mavi fon */
-    color: #1E40AF !important;       /* Daha tünd mavi yazı */
+    background: linear-gradient(132deg, #eaf2ff 0%, #dce9ff 100%) !important;
+    color: #2455bf !important;
     font-weight: 700 !important;
-    border-left: 4px solid #2563EB !important; /* Qalın border */
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1) !important;
+    border: 1px solid #bdd4ff !important;
+    box-shadow: 0 10px 24px rgba(70, 124, 232, 0.2) !important;
 }
 
 nav a.sidebar-link.active i,
 nav a.sidebar-link.bg-brand-soft.text-brand-blue i {
-    color: #1E40AF !important;
+    color: #2455bf !important;
 }
 
 /* Aktiv olmayan linklərin heç vaxt aktiv görünməməsi üçün */
 nav a.sidebar-link:not(.active):not(.bg-brand-soft.text-brand-blue) {
-    background: transparent !important;
-    color: #1F2937 !important;
-    border-left: 3px solid transparent !important;
-    box-shadow: none !important;
+    color: #24324b !important;
 }
 
 nav a.sidebar-link:not(.active):not(.bg-brand-soft.text-brand-blue) i {
-    color: #6B7280 !important;
+    color: #6f819d !important;
 }
 
 /* Hover effekti aktiv linkdə də işləsin */
 nav a.sidebar-link.active:hover {
-    background: #DBEAFE !important;
-    transform: translateX(5px) !important;
+    background: linear-gradient(132deg, #e7f0ff 0%, #d6e5ff 100%) !important;
+    transform: translateX(4px) !important;
 }
 
 /* ===== PROFİL LİNKİ XÜSUSİ ===== */
 a#profileBtn.sidebar-link {
-    color: #3B82F6 !important;
-    background: #EFF6FF !important;
-    border-left: 3px solid transparent !important;
+    color: #3f73db !important;
+    background: linear-gradient(140deg, #f1f7ff 0%, #e9f2ff 100%) !important;
+    border: 1px solid #cfe0ff !important;
 }
 
 a#profileBtn.sidebar-link i {
-    color: #3B82F6 !important;
+    color: #3f73db !important;
 }
 
 a#profileBtn.sidebar-link.active,
 a#profileBtn.sidebar-link.bg-brand-soft.text-brand-blue {
-    background: #DBEAFE !important;
-    color: #1E40AF !important;
-    border-left: 4px solid #2563EB !important;
+    background: linear-gradient(132deg, #e6efff 0%, #d7e6ff 100%) !important;
+    color: #2455bf !important;
+    border: 1px solid #b7d0ff !important;
 }
 
 a#profileBtn.sidebar-link.active i,
 a#profileBtn.sidebar-link.bg-brand-soft.text-brand-blue i {
-    color: #1E40AF !important;
+    color: #2455bf !important;
 }
 
 /* ===== KOMPAKT SIDEBAR ===== */
@@ -196,7 +198,8 @@ body.dark-theme #sidebarContent {
 
 /* Başlıqlar */
 body.dark-theme h2.sidebar-title.text-sm.font-semibold.text-slate-400 {
-    color: #f87171 !important; /* Qırmızı qalsın, amma parlaq */
+    color: #97b8ff !important;
+    border-left-color: #8fb3ff !important;
 }
 
 /* Linklər - normal */
