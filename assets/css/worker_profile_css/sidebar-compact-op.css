@@ -119,8 +119,9 @@ a#profileBtn.sidebar-link.bg-brand-soft.text-brand-blue i {
 }
 
 .compact-sidebar:not(:hover) #settingsMainBtn {
-    padding: 10px 8px !important;
+    padding: 10px !important;
     justify-content: center !important;
+    overflow: hidden !important;
 }
 
 .compact-sidebar:not(:hover) #settingsMainBtn > .flex.items-center.gap-3 {
@@ -135,13 +136,13 @@ a#profileBtn.sidebar-link.bg-brand-soft.text-brand-blue i {
 }
 
 .compact-sidebar:not(:hover) #settingsMainBtn .h-10.w-10.rounded-full {
-    width: 40px !important;
-    height: 40px !important;
+    width: 42px !important;
+    height: 42px !important;
     flex-shrink: 0 !important;
     overflow: hidden !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     line-height: 1 !important;
 }
 
