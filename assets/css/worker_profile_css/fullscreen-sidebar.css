@@ -78,7 +78,7 @@ header {
 
 /* Sidebar yalnız collapsed vəziyyətdə hover ediləndə böyüsün */
 #mainSidebar.sidebar-collapsed:hover {
-    width: 260px !important;
+    width: 320px !important;
     transition: width 0.3s ease;
     z-index: 10;
 }
@@ -111,6 +111,10 @@ header {
 
 #mainSidebar.sidebar-collapsed:hover #settingsMainBtn .text-left {
     display: block !important;
+}
+
+#mainSidebar.sidebar-collapsed:hover #settingsMainBtn .text-left p {
+    white-space: nowrap !important;
 }
 
 #mainSidebar.sidebar-collapsed:hover #settingsMainBtn > .flex.items-center.gap-2 {
@@ -227,14 +231,14 @@ section#taskManagerSection {
             padding: 12px 0 !important;
         }
         #mainSidebar {
-            width: 260px;
+            width: 320px;
             transition: all 0.3s ease;
         }
         #mainSidebar.sidebar-collapsed {
             width: 92px;
         }
         #mainSidebar.sidebar-collapsed:hover {
-            width: 260px !important;
+            width: 320px !important;
         }
         #mainSidebar.sidebar-collapsed:hover .sidebar-title,
         #mainSidebar.sidebar-collapsed:hover .sidebar-text {
