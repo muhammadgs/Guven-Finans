@@ -204,20 +204,20 @@ body::after {
 
 /* ===== BALACALAŞMIŞ VƏZİYYƏT - YUXARIDA, İKONLAR DÜZÜLÜR ===== */
 .wave-nav-container.minimized {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 12px 20px;
-    background: linear-gradient(125deg, rgba(30, 64, 175, 0.96), rgba(124, 58, 237, 0.94));
+    width: calc(100% - 48px);
+    max-width: none;
+    margin: 18px 24px;
+    padding: 20px 24px 22px 210px;
+    background: rgba(244, 246, 252, 0.92);
     position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    border-radius: 0 0 18px 18px;
-    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.28);
-    border: none;
+    top: 16px;
+    left: auto;
+    right: auto;
+    border-radius: 30px;
+    box-shadow: 0 14px 30px rgba(148, 163, 184, 0.22);
+    border: 1px solid #e2e8f0;
     animation: slideDown 0.4s ease;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
 }
 
 @keyframes slideDown {
@@ -235,7 +235,7 @@ body::after {
 .wave-nav-container.minimized .wave-nav-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 22px;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -244,48 +244,52 @@ body::after {
 
 .wave-nav-container.minimized .wave-item {
     flex: 0 1 auto;
-    min-width: 60px;
-    max-width: 80px;
-    padding: 8px 5px;
+    min-width: 90px;
+    max-width: 110px;
+    padding: 6px 5px;
     background: transparent;
-    border: none;
-    border-radius: 12px;
+    border: 1px solid transparent;
+    border-radius: 20px;
     margin: 0;
     transform: none !important;
     box-shadow: none;
 }
 
 .wave-nav-container.minimized .wave-item:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(59, 130, 246, 0.06);
     transform: translateY(-2px) !important;
 }
 
 .wave-nav-container.minimized .wave-item.selected {
-    background: rgba(255, 255, 255, 0.25) !important;
-    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+    background: rgba(59, 130, 246, 0.06) !important;
+    border: 2px solid rgba(99, 136, 245, 0.55) !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(99, 136, 245, 0.15);
 }
 
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ İKONLAR */
 .wave-nav-container.minimized .wave-icon {
-    width: 45px !important;
-    height: 45px !important;
-    font-size: 22px !important;
-    margin: 0 auto 2px auto !important;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 84px !important;
+    height: 84px !important;
+    font-size: 34px !important;
+    margin: 0 auto 10px auto !important;
+    background: linear-gradient(145deg, #ffffff, #eff3fb);
+    border: 1px solid #e5eaf3;
+    color: #5f86e9;
+    border-radius: 24px;
+    box-shadow: 0 8px 18px rgba(148, 163, 184, 0.18);
 }
 
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ BAŞLIQLAR */
 .wave-nav-container.minimized .wave-title {
-    font-size: 10px !important;
+    font-size: 15px !important;
     margin: 2px 0 0 0 !important;
     text-transform: none;
     letter-spacing: normal;
     white-space: nowrap;
     display: block !important;
-    color: white;
+    color: #334155;
+    font-weight: 700;
 }
 
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ SAYLAR GİZLƏNİR */
@@ -349,21 +353,25 @@ body::after {
 
     /* Balacalaşmış vəziyyət - mobil */
     .wave-nav-container.minimized {
-        padding: 8px 10px;
+        width: calc(100% - 20px);
+        margin: 10px;
+        padding: 14px 12px;
+        top: 8px;
     }
 
     .wave-nav-container.minimized .wave-item {
-        min-width: 50px;
+        min-width: 68px;
     }
 
     .wave-nav-container.minimized .wave-icon {
-        width: 40px !important;
-        height: 40px !important;
-        font-size: 20px !important;
+        width: 54px !important;
+        height: 54px !important;
+        font-size: 22px !important;
+        border-radius: 16px;
     }
 
     .wave-nav-container.minimized .wave-title {
-        font-size: 9px !important;
+        font-size: 14px !important;
     }
 }
 
@@ -952,19 +960,18 @@ body::after {
 /* Minimized versiya */
 .tasks-header.minimized {
     position: fixed;
-    left: 20px;
-    top: 15px;
+    left: 34px;
+    top: 30px;
     margin: 0;
-    padding: 1px 2px;
-    z-index: 1000;
-    background: linear-gradient(145deg, #3b82f6, #f8fafc);
+    padding: 8px;
+    z-index: 1002;
+    background: transparent;
     border: none;
-    box-shadow:
-        0 1px 3px -10px rgba(59, 130, 246, 0.4),
-        0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
     animation: slideInLeft 0.4s ease;
     min-width: auto;
     justify-content: flex-start;
+    pointer-events: none;
 }
 
 .tasks-header.minimized .header-content {
