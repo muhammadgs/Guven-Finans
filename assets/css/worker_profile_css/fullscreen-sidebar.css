@@ -28,7 +28,7 @@ header {
 
 /* Sidebar daralmış vəziyyət - SADƏCƏ İKONKALAR */
 .sidebar-collapsed {
-    width: 80px !important;
+    width: 92px !important;
 }
 
 .sidebar-collapsed .sidebar-title {
@@ -41,12 +41,39 @@ header {
 
 .sidebar-collapsed .sidebar-link {
     justify-content: center;
-    padding: 12px 0 !important;
+    padding: 12px 6px !important;
 }
 
 .sidebar-collapsed .sidebar-link i {
     margin: 0;
     font-size: 1.25rem;
+}
+
+/* Collapsed vəziyyətdə profil blokunun daşmasının qarşısını al */
+.sidebar-collapsed #settingsMainBtn {
+    padding: 10px 8px !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+.sidebar-collapsed #settingsMainBtn > .flex.items-center.gap-3 {
+    width: 100% !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    gap: 0 !important;
+}
+
+.sidebar-collapsed #settingsMainBtn .text-left,
+.sidebar-collapsed #settingsMainBtn > .flex.items-center.gap-2 {
+    display: none !important;
+}
+
+.sidebar-collapsed #settingsMainBtn .h-10.w-10.rounded-full {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
 }
 
 /* Sidebar yalnız collapsed vəziyyətdə hover ediləndə böyüsün */
@@ -177,7 +204,7 @@ section#taskManagerSection {
             transition: all 0.3s ease;
         }
         #mainSidebar.sidebar-collapsed {
-            width: 80px;
+            width: 92px;
         }
         #mainSidebar.sidebar-collapsed:hover {
             width: 260px !important;
