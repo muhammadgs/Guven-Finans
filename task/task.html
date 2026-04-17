@@ -56,31 +56,32 @@
     <style>
         /* ========== CACHE TƏMİZLƏMƏ DÜYMƏSİ STİLLƏRİ ========== */
         .cache-clear-btn {
-            background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 10px 18px;
-            color: white;
-            font-weight: 600;
+            background: linear-gradient(135deg, #ff8a00 0%, #ff416c 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            padding: 11px 18px;
+            color: #fff;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 20px rgba(255, 65, 108, 0.3);
             font-size: 13px;
             margin-left: auto;
             z-index: 100;
+            backdrop-filter: blur(6px);
         }
 
         .cache-clear-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(220, 38, 38, 0.4);
-            background: linear-gradient(135deg, #ea580c 0%, #b91c1c 100%);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 14px 24px rgba(255, 65, 108, 0.35);
+            filter: saturate(1.15);
         }
 
         .cache-clear-btn:active {
-            transform: translateY(1px);
+            transform: translateY(0);
         }
 
         .cache-clear-btn i {
@@ -127,9 +128,23 @@
         /* Header layout - sadəcə logo */
         .tasks-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 10px 20px;
+            margin: 20px auto 0;
+            padding: 16px 24px;
+            width: min(86%, 1000px);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 18px 50px rgba(31, 41, 55, 0.18);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+        }
+
+        .professional-logo {
+            width: 86px;
+            height: 86px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 14px rgba(59, 130, 246, 0.28));
         }
     </style>
 </head>
@@ -1750,4 +1765,4 @@
 
 
 </body>
-</html> 
+</html>

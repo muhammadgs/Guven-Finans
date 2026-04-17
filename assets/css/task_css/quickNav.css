@@ -12,122 +12,154 @@
 /* Köhnə CSS-iniz olduğu kimi qalır */
 /* ===== DALĞA FORMALI 6 HİSSƏLİ TASK PƏNCƏRƏLƏR ===== */
 
-/* GÖZƏL ARXA FON RƏNGİ - gradient bənövşəyi */
+/* GÖZƏL ARXA FON RƏNGİ - modern glassmorphism gradient */
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background:
+        radial-gradient(circle at 8% 16%, rgba(79, 70, 229, 0.28), transparent 42%),
+        radial-gradient(circle at 88% 10%, rgba(236, 72, 153, 0.2), transparent 36%),
+        linear-gradient(135deg, #4f46e5 0%, #6366f1 38%, #7c3aed 100%);
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
 }
 
 /* NORMAL VƏZİYYƏT - MƏRKƏZDƏ, 6 HİSSƏ */
 .wave-nav-container {
-    width: 80%;
-    max-width: 900px;
-    margin: 40px auto 20px auto;
-    background: linear-gradient(135deg, #60a5fa, #3b82f6);
-    border-radius: 60px 60px 30px 30px;
-    box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.5);
-    padding: 30px 20px;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: min(82%, 980px);
+    margin: 28px auto 24px auto;
+    background: linear-gradient(145deg, rgba(59, 130, 246, 0.52), rgba(37, 99, 235, 0.42));
+    border-radius: 34px;
+    box-shadow: 0 30px 60px -24px rgba(15, 23, 42, 0.55);
+    padding: 26px 24px;
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     z-index: 100;
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(14px);
+    overflow: hidden;
+}
+
+.wave-nav-container::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 33px;
+    background: linear-gradient(130deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.06) 48%, transparent 92%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* 6 HİSSƏ ÜÇÜN XÜSUSİ DÜZÜLÜŞ */
 .wave-nav-container .wave-nav-items {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 18px;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
 }
 
 /* HƏR BİR HİSSƏ (ITEM) ÜÇÜN STİL */
 .wave-nav-container .wave-item {
-    flex: 0 1 calc(33.333% - 40px);
-    min-width: 140px;
-    max-width: 180px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    padding: 20px 10px;
+    flex: 0 1 calc(33.333% - 34px);
+    min-width: 142px;
+    max-width: 190px;
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 18px 10px 16px;
     cursor: pointer;
-    transition: all 0.4s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 28px rgba(2, 6, 23, 0.2);
+    position: relative;
+}
+
+.wave-nav-container .wave-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 /* İTEM HOVER EFEKTİ */
 .wave-nav-container .wave-item:hover {
-    transform: translateY(-10px) scale(1.05);
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-7px) scale(1.03);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.14));
+    border-color: rgba(255, 255, 255, 0.56);
+    box-shadow: 0 20px 36px rgba(2, 6, 23, 0.28);
+}
+
+.wave-nav-container .wave-item:hover::after {
+    opacity: 1;
 }
 
 /* SEÇİLMİŞ İTEM */
 .wave-nav-container .wave-item.selected {
-    background: rgba(255, 255, 255, 0.4) !important;
-    border: 4px solid #ffffff !important;
-    transform: translateY(-15px) scale(1.08);
-    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.2)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 22px 42px rgba(2, 6, 23, 0.34);
 }
 
 /* İKONLAR - NORMAL VƏZİYYƏTDƏ BÖYÜK */
 .wave-nav-container .wave-icon {
-    width: 70px;
-    height: 70px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.16));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 28px;
     color: white;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 12px auto;
     transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 16px rgba(15, 23, 42, 0.2);
 }
 
 /* SEÇİLMİŞ İTEM-də İKON */
 .wave-nav-container .wave-item.selected .wave-icon {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.1);
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.3));
+    transform: scale(1.08);
     border-color: white;
 }
 
 /* BAŞLIQLAR */
 .wave-nav-container .wave-title {
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     color: white;
-    margin: 8px 0 5px 0;
-    letter-spacing: 0.5px;
+    margin: 7px 0 5px 0;
+    letter-spacing: 0.4px;
     text-transform: uppercase;
+    text-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
 }
 
 /* SAYLAR */
 .wave-nav-container .wave-count {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 800;
     color: white;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.22);
     padding: 4px 12px;
     border-radius: 40px;
     display: inline-block;
-    min-width: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 /* SEÇİLMİŞ İTEM-də SAY */
 .wave-nav-container .wave-item.selected .wave-count {
     background: white;
-    color: #3b82f6;
+    color: #2563eb;
     font-weight: 900;
 }
 
@@ -137,15 +169,16 @@ body {
     max-width: 100%;
     margin: 0;
     padding: 12px 20px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(125deg, rgba(30, 64, 175, 0.96), rgba(124, 58, 237, 0.94));
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.28);
     border: none;
     animation: slideDown 0.4s ease;
+    backdrop-filter: blur(12px);
 }
 
 @keyframes slideDown {
