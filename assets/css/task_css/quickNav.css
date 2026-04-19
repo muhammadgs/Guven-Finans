@@ -75,7 +75,7 @@ body::after {
     justify-content: center;
     transform: translateY(0);
     transform-origin: top center;
-    transition: width 500ms ease-in-out, max-width 500ms ease-in-out, margin 500ms ease-in-out, padding 500ms ease-in-out, border-radius 500ms ease-in-out, box-shadow 500ms ease-in-out, transform 500ms ease-in-out, background 500ms ease-in-out;
+    transition: width 500ms ease-in-out, max-width 500ms ease-in-out, min-height 500ms ease-in-out, margin 500ms ease-in-out, padding 500ms ease-in-out, border-radius 500ms ease-in-out, box-shadow 500ms ease-in-out, transform 500ms ease-in-out, background 500ms ease-in-out;
     position: relative;
     z-index: 100;
     border: 1px solid rgba(255, 255, 255, 0.45);
