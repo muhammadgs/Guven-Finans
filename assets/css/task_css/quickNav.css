@@ -284,19 +284,19 @@ body::after {
     border: 1px solid transparent;
     border-radius: 20px;
     margin: 0;
-    transform: none !important;
+    transform: none;
     box-shadow: none;
 }
 
 .wave-nav-container.minimized .wave-item:hover {
     background: rgba(59, 130, 246, 0.06);
-    transform: translateY(-2px) !important;
+    transform: translateY(-2px);
 }
 
 .wave-nav-container.minimized .wave-item.selected {
     background: rgba(59, 130, 246, 0.06) !important;
     border: 2px solid rgba(99, 136, 245, 0.55) !important;
-    transform: translateY(-2px) !important;
+    transform: translateY(-2px);
     box-shadow: 0 8px 16px rgba(99, 136, 245, 0.15);
 }
 

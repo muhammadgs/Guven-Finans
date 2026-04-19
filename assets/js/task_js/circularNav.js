@@ -1,13 +1,13 @@
 /**
  * circularNav.js - Dalğa Formasında Naviqasiya Sistemi
- * @version 1.0.8
- * @lastModified 2024-01-16
+ * @version 1.1.0
+ * @lastModified 2026-04-19
  */
 
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
 
-    console.log('🌊 WaveNav yükləndi - v1.0.8 (Toggle funksiyası əlavə olundu)');
+    console.log('🌊 WaveNav yükləndi - v1.1.0 (FLIP layout animasiyası aktivdir)');
 
     // ===== ELEMENTLƏRİ SEÇ =====
     const waveNav = document.getElementById('waveNav');
@@ -48,14 +48,94 @@ document.addEventListener('DOMContentLoaded', function() {
         navItems.forEach(item => item.classList.remove('selected'));
     }
 
+    // ===== FLIP LAYOUT ANİMASİYASI =====
+    function animateWaveLayoutChange(changeLayoutFn) {
+        if (!waveNav || !navItems.length) {
+            changeLayoutFn();
+            return;
+        }
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            changeLayoutFn();
+            return;
+        }
+
+        const firstRects = new Map();
+        navItems.forEach((item) => {
+            firstRects.set(item, item.getBoundingClientRect());
+        });
+
+        changeLayoutFn();
+
+        const runningAnimations = [];
+        navItems.forEach((item) => {
+            const first = firstRects.get(item);
+            const last = item.getBoundingClientRect();
+            if (!first || !last) return;
+
+            const dx = first.left - last.left;
+            const dy = first.top - last.top;
+            const sx = first.width / (last.width || 1);
+            const sy = first.height / (last.height || 1);
+
+            if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5 && Math.abs(sx - 1) < 0.01 && Math.abs(sy - 1) < 0.01) {
+                return;
+            }
+
+            item.style.willChange = 'transform';
+            item.style.transformOrigin = 'top left';
+            item.style.transition = 'none';
+            item.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
+
+            // Reflow: invert vəziyyəti tətbiq olunsun
+            item.getBoundingClientRect();
+
+            const animation = item.animate(
+                [
+                    { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
+                    { transform: 'translate(0px, 0px) scale(1, 1)' }
+                ],
+                {
+                    duration: 680,
+                    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                    fill: 'both'
+                }
+            );
+
+            animation.onfinish = () => {
+                item.style.transition = '';
+                item.style.transform = '';
+                item.style.willChange = '';
+                item.style.transformOrigin = '';
+            };
+
+            animation.oncancel = animation.onfinish;
+            runningAnimations.push(animation);
+        });
+
+        if (!runningAnimations.length) {
+            navItems.forEach((item) => {
+                item.style.transition = '';
+                item.style.transform = '';
+                item.style.willChange = '';
+                item.style.transformOrigin = '';
+            });
+        }
+    }
+
     // ===== PANEL BALACALAŞ =====
     function minimizePanel() {
-        if(waveNav) waveNav.classList.add('minimized');
+        animateWaveLayoutChange(() => {
+            waveNav.classList.add('minimized');
+        });
     }
 
     // ===== PANEL NORMALA QAYIT =====
     function restorePanel() {
-        if(waveNav) waveNav.classList.remove('minimized');
+        animateWaveLayoutChange(() => {
+            waveNav.classList.remove('minimized');
+        });
     }
 
     // ===== BÜTÜN PANELLERİ GÖSTER (sadece panel görünsün, bölmələr gizlənsin) =====
@@ -156,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lastClickedItem = newItem; // ƏLAVƏ EDİLDİ
     }
 
-    console.log('✅ Panel hazır - Toggle funksiyası aktiv');
+    console.log('✅ Panel hazır - FLIP animasiya aktiv');
     console.log('📌 İstifadə:');
     console.log('   - Eyni item-ə təkrar klik → panel geri qayıdır');
     console.log('   - ESC düyməsi → panel normala qayıdır');
