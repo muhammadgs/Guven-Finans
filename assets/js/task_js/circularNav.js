@@ -168,25 +168,3 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('   - ESC düyməsi → panel normala qayıdır');
     console.log('   - Panelə klik → panel açılır');
 });
-// Panel və başlıq arasında əlaqə
-document.addEventListener('DOMContentLoaded', function() {
-    const waveNav = document.getElementById('waveNav');
-    const tasksHeader = document.querySelector('.tasks-header');
-
-    if (waveNav && tasksHeader) {
-        // Panel dəyişdikdə başlığa da class əlavə et
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.attributeName === 'class') {
-                    if (waveNav.classList.contains('minimized')) {
-                        tasksHeader.classList.add('minimized');
-                    } else {
-                        tasksHeader.classList.remove('minimized');
-                    }
-                }
-            });
-        });
-
-        observer.observe(waveNav, { attributes: true });
-    }
-});
