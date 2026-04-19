@@ -240,7 +240,7 @@ body::after {
     width: calc(100% - 48px);
     max-width: none;
     margin: 18px 24px;
-    padding: 20px 24px 22px 210px;
+    padding: 16px 18px 18px 170px;
     min-height: 0;
     background: rgba(244, 246, 252, 0.92);
     position: sticky;
@@ -257,19 +257,21 @@ body::after {
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ İTEMLƏR - ÜFÜQİ DÜZÜLÜR */
 .wave-nav-container.minimized .wave-nav-items {
     display: flex;
-    flex-wrap: wrap;
-    gap: 22px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 12px;
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
+    min-width: 0;
 }
 
 .wave-nav-container.minimized .wave-item {
-    flex: 0 1 auto;
-    min-width: 90px;
-    max-width: 110px;
-    padding: 6px 5px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 94px;
+    padding: 4px 2px;
     background: transparent;
     border: 1px solid transparent;
     border-radius: 20px;
@@ -292,10 +294,10 @@ body::after {
 
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ İKONLAR */
 .wave-nav-container.minimized .wave-icon {
-    width: 84px !important;
-    height: 84px !important;
-    font-size: 34px !important;
-    margin: 0 auto 10px auto !important;
+    width: 72px !important;
+    height: 72px !important;
+    font-size: 28px !important;
+    margin: 0 auto 8px auto !important;
     background: linear-gradient(145deg, #ffffff, #eff3fb);
     border: 1px solid #e5eaf3;
     color: #5f86e9;
@@ -305,7 +307,7 @@ body::after {
 
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ BAŞLIQLAR */
 .wave-nav-container.minimized .wave-title {
-    font-size: 15px !important;
+    font-size: 13px !important;
     margin: 2px 0 0 0 !important;
     text-transform: none;
     letter-spacing: normal;
@@ -383,23 +385,28 @@ body::after {
         width: calc(100% - 20px);
         margin: 10px;
         min-height: 0;
-        padding: 14px 12px;
+        padding: 12px 8px;
         top: 8px;
     }
 
+    .wave-nav-container.minimized .wave-nav-items {
+        gap: 6px;
+    }
+
     .wave-nav-container.minimized .wave-item {
-        min-width: 68px;
+        max-width: 72px;
+        padding: 2px 1px;
     }
 
     .wave-nav-container.minimized .wave-icon {
-        width: 54px !important;
-        height: 54px !important;
-        font-size: 22px !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 20px !important;
         border-radius: 16px;
     }
 
     .wave-nav-container.minimized .wave-title {
-        font-size: 14px !important;
+        font-size: 11px !important;
     }
 }
 
@@ -415,21 +422,21 @@ body::after {
 
     /* Balacalaşmış vəziyyət - kiçik mobil */
     .wave-nav-container.minimized .wave-nav-items {
-        gap: 2px;
+        gap: 4px;
     }
 
     .wave-nav-container.minimized .wave-item {
-        min-width: 45px;
+        max-width: 60px;
     }
 
     .wave-nav-container.minimized .wave-icon {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 18px !important;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 16px !important;
     }
 
     .wave-nav-container.minimized .wave-title {
-        font-size: 8px !important;
+        font-size: 9px !important;
     }
 }
 
