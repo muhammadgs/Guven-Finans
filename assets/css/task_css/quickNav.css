@@ -23,6 +23,7 @@ body {
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
     position: relative;
+    isolation: isolate;
     overflow-x: hidden;
 }
 
@@ -31,7 +32,15 @@ body::after {
     content: "";
     position: fixed;
     pointer-events: none;
-    z-index: 0;
+    z-index: -2;
+}
+
+.wave-nav-container,
+.tasks-header,
+.table-card,
+.table-wrapper {
+    position: relative;
+    z-index: 1;
 }
 
 body::before {
