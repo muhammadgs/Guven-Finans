@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
 
             const target = this.dataset.target;
             console.log('🔘 Klik:', target, 'Son klik:', lastClickedItem ? lastClickedItem.dataset.target : 'yoxdur');
@@ -111,21 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ===== PANELƏ KLİK (balacalaşmış vəziyyətdə açmaq üçün) =====
+    // ===== PANELƏ KLİK =====
     if(waveNav) {
         waveNav.addEventListener('click', function(e) {
-            // Əgər panel balacalaşıbsa və birbaşa panelə klik olunubsa (item-lərə yox)
-            if(this.classList.contains('minimized') && !e.target.closest('.wave-item')) {
+            // Yalnız düymələr (.wave-item) state dəyişə bilər.
+            // Container-in boş sahəsinə klik edildikdə heç bir state dəyişikliyi etmə.
+            if(!e.target.closest('.wave-item')) {
                 e.stopPropagation();
-
-                // Panel normala qayıtsın
-                restorePanel();
-
-                // Seçilmiş item varsa, onu seçili saxla
-                if(activeItem) {
-                    const target = activeItem.dataset.target;
-                    showSection(target);
-                }
+                return;
             }
         });
     }
