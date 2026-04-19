@@ -64,12 +64,18 @@ body::after {
 /* NORMAL VƏZİYYƏT - MƏRKƏZDƏ, 6 HİSSƏ */
 .wave-nav-container {
     width: min(82%, 980px);
-    margin: 28px auto 24px auto;
+    margin: 0 auto;
     background: linear-gradient(145deg, rgba(232, 238, 250, 0.72), rgba(224, 231, 246, 0.78));
     border-radius: 34px;
     box-shadow: 0 28px 55px -32px rgba(76, 97, 138, 0.5);
-    padding: 26px 24px;
-    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 30px 28px;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
+    transform-origin: top center;
+    transition: all 500ms ease-in-out;
     position: relative;
     z-index: 100;
     border: 1px solid rgba(255, 255, 255, 0.45);
@@ -102,21 +108,21 @@ body::after {
 .wave-nav-container .wave-nav-items {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
+    gap: 20px;
     align-items: stretch;
-    padding: 8px;
+    padding: 10px;
 }
 
 /* HƏR BİR HİSSƏ (ITEM) ÜÇÜN STİL */
 .wave-nav-container .wave-item {
     width: 100%;
-    min-height: 148px;
+    min-height: 164px;
     background: linear-gradient(155deg, rgba(255, 255, 255, 0.82), rgba(242, 246, 255, 0.75));
     backdrop-filter: blur(14px);
     border-radius: 22px;
-    padding: 18px 10px 16px;
+    padding: 20px 12px 18px;
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 500ms ease-in-out;
     border: 1px solid rgba(202, 216, 246, 0.6);
     text-align: center;
     box-shadow: 0 12px 22px rgba(91, 116, 161, 0.14);
@@ -175,14 +181,14 @@ body::after {
 
 /* İKONLAR - NORMAL VƏZİYYƏTDƏ BÖYÜK */
 .wave-nav-container .wave-icon {
-    width: 62px;
-    height: 62px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background: linear-gradient(150deg, rgba(230, 238, 252, 0.96), rgba(216, 230, 252, 0.82));
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 31px;
     color: #5f93ef;
     margin: 0 auto 12px auto;
     transition: all 0.3s ease;
@@ -235,6 +241,7 @@ body::after {
     max-width: none;
     margin: 18px 24px;
     padding: 20px 24px 22px 210px;
+    min-height: 0;
     background: rgba(244, 246, 252, 0.92);
     position: sticky;
     top: 16px;
@@ -243,19 +250,8 @@ body::after {
     border-radius: 30px;
     box-shadow: 0 14px 30px rgba(148, 163, 184, 0.22);
     border: 1px solid #e2e8f0;
-    animation: slideDown 0.4s ease;
+    transform: translateY(0);
     backdrop-filter: blur(8px);
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* BALACALAŞMIŞ VƏZİYYƏTDƏ İTEMLƏR - ÜFÜQİ DÜZÜLÜR */
@@ -353,13 +349,14 @@ body::after {
     /* Normal vəziyyət - mobil */
     .wave-nav-container {
         width: 95%;
-        padding: 20px 10px;
+        min-height: calc(100vh - 120px);
+        padding: 24px 12px;
         border-radius: 40px;
-        margin: 20px auto;
+        margin: 0 auto;
     }
 
     .wave-nav-container .wave-item {
-        min-height: 140px;
+        min-height: 146px;
     }
 
     .wave-nav-container .wave-nav-items {
@@ -367,9 +364,9 @@ body::after {
     }
 
     .wave-nav-container .wave-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
+        width: 64px;
+        height: 64px;
+        font-size: 30px;
     }
 
     .wave-nav-container .wave-title {
@@ -385,6 +382,7 @@ body::after {
     .wave-nav-container.minimized {
         width: calc(100% - 20px);
         margin: 10px;
+        min-height: 0;
         padding: 14px 12px;
         top: 8px;
     }
