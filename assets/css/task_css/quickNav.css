@@ -91,19 +91,17 @@ body::after {
 
 /* 6 HİSSƏ ÜÇÜN XÜSUSİ DÜZÜLÜŞ */
 .wave-nav-container .wave-nav-items {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch;
     padding: 8px;
 }
 
 /* HƏR BİR HİSSƏ (ITEM) ÜÇÜN STİL */
 .wave-nav-container .wave-item {
-    flex: 0 1 calc(33.333% - 34px);
-    min-width: 142px;
-    max-width: 190px;
+    width: 100%;
+    min-height: 148px;
     background: linear-gradient(155deg, rgba(255, 255, 255, 0.82), rgba(242, 246, 255, 0.75));
     backdrop-filter: blur(14px);
     border-radius: 22px;
@@ -114,6 +112,26 @@ body::after {
     text-align: center;
     box-shadow: 0 12px 22px rgba(91, 116, 161, 0.14);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wave-nav-container .wave-item-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wave-nav-container .wave-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .wave-nav-container .wave-item::after {
@@ -332,8 +350,11 @@ body::after {
     }
 
     .wave-nav-container .wave-item {
-        flex: 0 1 calc(50% - 30px);
-        min-width: 120px;
+        min-height: 140px;
+    }
+
+    .wave-nav-container .wave-nav-items {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .wave-nav-container .wave-icon {
@@ -378,8 +399,11 @@ body::after {
 @media (max-width: 480px) {
     /* Normal vəziyyət - kiçik mobil */
     .wave-nav-container .wave-item {
-        flex: 0 1 100%;
-        max-width: 250px;
+        min-height: 132px;
+    }
+
+    .wave-nav-container .wave-nav-items {
+        grid-template-columns: 1fr;
     }
 
     /* Balacalaşmış vəziyyət - kiçik mobil */
