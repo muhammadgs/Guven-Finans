@@ -61,14 +61,71 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        const ANIMATION_DURATION = 680;
+        const ANIMATION_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
         const firstRects = new Map();
         navItems.forEach((item) => {
             firstRects.set(item, item.getBoundingClientRect());
         });
 
+        const firstWaveNavRect = waveNav.getBoundingClientRect();
+        const firstWaveNavStyles = window.getComputedStyle(waveNav);
+        const firstWaveNavPadding = {
+            top: firstWaveNavStyles.paddingTop,
+            right: firstWaveNavStyles.paddingRight,
+            bottom: firstWaveNavStyles.paddingBottom,
+            left: firstWaveNavStyles.paddingLeft
+        };
+
         changeLayoutFn();
 
+        const lastWaveNavRect = waveNav.getBoundingClientRect();
+        const lastWaveNavStyles = window.getComputedStyle(waveNav);
+        const lastWaveNavPadding = {
+            top: lastWaveNavStyles.paddingTop,
+            right: lastWaveNavStyles.paddingRight,
+            bottom: lastWaveNavStyles.paddingBottom,
+            left: lastWaveNavStyles.paddingLeft
+        };
+
         const runningAnimations = [];
+        const originalOverflow = waveNav.style.overflow;
+        waveNav.style.overflow = 'visible';
+
+        waveNav.style.willChange = 'width, height, padding';
+        const containerAnimation = waveNav.animate(
+            [
+                {
+                    width: `${firstWaveNavRect.width}px`,
+                    height: `${firstWaveNavRect.height}px`,
+                    paddingTop: firstWaveNavPadding.top,
+                    paddingRight: firstWaveNavPadding.right,
+                    paddingBottom: firstWaveNavPadding.bottom,
+                    paddingLeft: firstWaveNavPadding.left
+                },
+                {
+                    width: `${lastWaveNavRect.width}px`,
+                    height: `${lastWaveNavRect.height}px`,
+                    paddingTop: lastWaveNavPadding.top,
+                    paddingRight: lastWaveNavPadding.right,
+                    paddingBottom: lastWaveNavPadding.bottom,
+                    paddingLeft: lastWaveNavPadding.left
+                }
+            ],
+            {
+                duration: ANIMATION_DURATION,
+                easing: ANIMATION_EASING,
+                fill: 'both'
+            }
+        );
+
+        containerAnimation.onfinish = () => {
+            waveNav.style.willChange = '';
+            waveNav.style.overflow = originalOverflow || 'hidden';
+        };
+        containerAnimation.oncancel = containerAnimation.onfinish;
+
         navItems.forEach((item) => {
             const first = firstRects.get(item);
             const last = item.getBoundingClientRect();
@@ -97,8 +154,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     { transform: 'translate(0px, 0px) scale(1, 1)' }
                 ],
                 {
-                    duration: 680,
-                    easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                    duration: ANIMATION_DURATION,
+                    easing: ANIMATION_EASING,
                     fill: 'both'
                 }
             );
