@@ -27,6 +27,13 @@ body {
     overflow-x: hidden;
 }
 
+/* İlkin (2x3) vəziyyətdə paneli səhifədə şaquli mərkəzlə */
+body:has(.wave-nav-container:not(.minimized)) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 body::before,
 body::after {
     content: "";
@@ -68,7 +75,7 @@ body::after {
     background: linear-gradient(145deg, rgba(232, 238, 250, 0.72), rgba(224, 231, 246, 0.78));
     border-radius: 34px;
     box-shadow: 0 28px 55px -32px rgba(76, 97, 138, 0.5);
-    padding: 30px 28px;
+    padding: 18px 28px;
     min-height: calc(100vh - 140px);
     display: flex;
     align-items: center;
@@ -111,7 +118,7 @@ body::after {
     justify-content: center;
     align-items: stretch;
     gap: 20px;
-    padding: 10px;
+    padding: 4px 10px;
     width: 100%;
     margin: 0 auto;
     max-width: 980px;
