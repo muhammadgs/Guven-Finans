@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let activeItem = null;
     let currentSection = 'new';
     let lastClickedItem = null; // ƏLAVƏ EDİLDİ - Son kliklənən item-i izləmək üçün
+    let isLayoutAnimating = false;
+    let runningAnimations = [];
 
     // ===== BÜTÜN BÖLMƏLƏRİ GİZLƏ =====
     function hideAllSections() {
@@ -49,20 +51,48 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== FLIP LAYOUT ANİMASİYASI =====
+    function stopRunningAnimations() {
+        if (!runningAnimations.length) return;
+
+        runningAnimations.forEach((anim) => {
+            try {
+                anim.cancel();
+            } catch (_) {
+                // ignore
+            }
+        });
+
+        runningAnimations = [];
+
+        if (waveNav) {
+            waveNav.style.willChange = '';
+            waveNav.style.overflow = '';
+        }
+
+        navItems.forEach((item) => {
+            item.style.transition = '';
+            item.style.transform = '';
+            item.style.willChange = '';
+            item.style.transformOrigin = '';
+        });
+    }
+
     function animateWaveLayoutChange(changeLayoutFn) {
         if (!waveNav || !navItems.length) {
             changeLayoutFn();
-            return;
+            return Promise.resolve();
         }
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
             changeLayoutFn();
-            return;
+            return Promise.resolve();
         }
 
         const ANIMATION_DURATION = 680;
         const ANIMATION_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+        stopRunningAnimations();
 
         const firstRects = new Map();
         navItems.forEach((item) => {
@@ -89,69 +119,49 @@ document.addEventListener('DOMContentLoaded', function() {
             left: lastWaveNavStyles.paddingLeft
         };
 
-        const runningAnimations = [];
         const originalOverflow = waveNav.style.overflow;
         waveNav.style.overflow = 'visible';
 
-        waveNav.style.willChange = 'width, height, padding';
-        const containerAnimation = waveNav.animate(
-            [
-                {
-                    width: `${firstWaveNavRect.width}px`,
-                    height: `${firstWaveNavRect.height}px`,
-                    paddingTop: firstWaveNavPadding.top,
-                    paddingRight: firstWaveNavPadding.right,
-                    paddingBottom: firstWaveNavPadding.bottom,
-                    paddingLeft: firstWaveNavPadding.left
-                },
-                {
-                    width: `${lastWaveNavRect.width}px`,
-                    height: `${lastWaveNavRect.height}px`,
-                    paddingTop: lastWaveNavPadding.top,
-                    paddingRight: lastWaveNavPadding.right,
-                    paddingBottom: lastWaveNavPadding.bottom,
-                    paddingLeft: lastWaveNavPadding.left
-                }
-            ],
-            {
-                duration: ANIMATION_DURATION,
-                easing: ANIMATION_EASING,
-                fill: 'both'
-            }
-        );
+        return new Promise((resolve) => {
+            let pendingAnimations = 1; // container animation
 
-        containerAnimation.onfinish = () => {
-            waveNav.style.willChange = '';
-            waveNav.style.overflow = originalOverflow || 'hidden';
-        };
-        containerAnimation.oncancel = containerAnimation.onfinish;
+            const finalizeAnimation = () => {
+                pendingAnimations -= 1;
+                if (pendingAnimations > 0) return;
 
-        navItems.forEach((item) => {
-            const first = firstRects.get(item);
-            const last = item.getBoundingClientRect();
-            if (!first || !last) return;
+                waveNav.style.willChange = '';
+                waveNav.style.overflow = originalOverflow || 'hidden';
 
-            const dx = first.left - last.left;
-            const dy = first.top - last.top;
-            const sx = first.width / (last.width || 1);
-            const sy = first.height / (last.height || 1);
+                navItems.forEach((item) => {
+                    item.style.transition = '';
+                    item.style.transform = '';
+                    item.style.willChange = '';
+                    item.style.transformOrigin = '';
+                });
 
-            if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5 && Math.abs(sx - 1) < 0.01 && Math.abs(sy - 1) < 0.01) {
-                return;
-            }
+                runningAnimations = [];
+                resolve();
+            };
 
-            item.style.willChange = 'transform';
-            item.style.transformOrigin = 'top left';
-            item.style.transition = 'none';
-            item.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
-
-            // Reflow: invert vəziyyəti tətbiq olunsun
-            item.getBoundingClientRect();
-
-            const animation = item.animate(
+            waveNav.style.willChange = 'width, height, padding';
+            const containerAnimation = waveNav.animate(
                 [
-                    { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
-                    { transform: 'translate(0px, 0px) scale(1, 1)' }
+                    {
+                        width: `${firstWaveNavRect.width}px`,
+                        height: `${firstWaveNavRect.height}px`,
+                        paddingTop: firstWaveNavPadding.top,
+                        paddingRight: firstWaveNavPadding.right,
+                        paddingBottom: firstWaveNavPadding.bottom,
+                        paddingLeft: firstWaveNavPadding.left
+                    },
+                    {
+                        width: `${lastWaveNavRect.width}px`,
+                        height: `${lastWaveNavRect.height}px`,
+                        paddingTop: lastWaveNavPadding.top,
+                        paddingRight: lastWaveNavPadding.right,
+                        paddingBottom: lastWaveNavPadding.bottom,
+                        paddingLeft: lastWaveNavPadding.left
+                    }
                 ],
                 {
                     duration: ANIMATION_DURATION,
@@ -159,38 +169,62 @@ document.addEventListener('DOMContentLoaded', function() {
                     fill: 'both'
                 }
             );
+            containerAnimation.onfinish = finalizeAnimation;
+            containerAnimation.oncancel = finalizeAnimation;
+            runningAnimations.push(containerAnimation);
 
-            animation.onfinish = () => {
-                item.style.transition = '';
-                item.style.transform = '';
-                item.style.willChange = '';
-                item.style.transformOrigin = '';
-            };
-
-            animation.oncancel = animation.onfinish;
-            runningAnimations.push(animation);
-        });
-
-        if (!runningAnimations.length) {
             navItems.forEach((item) => {
-                item.style.transition = '';
-                item.style.transform = '';
-                item.style.willChange = '';
-                item.style.transformOrigin = '';
+                const first = firstRects.get(item);
+                const last = item.getBoundingClientRect();
+                if (!first || !last) return;
+
+                const dx = first.left - last.left;
+                const dy = first.top - last.top;
+                const sx = first.width / (last.width || 1);
+                const sy = first.height / (last.height || 1);
+
+                if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5 && Math.abs(sx - 1) < 0.01 && Math.abs(sy - 1) < 0.01) {
+                    return;
+                }
+
+                item.style.willChange = 'transform';
+                item.style.transformOrigin = 'top left';
+                item.style.transition = 'none';
+                item.style.transform = `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`;
+
+                // Reflow: invert vəziyyəti tətbiq olunsun
+                item.getBoundingClientRect();
+
+                pendingAnimations += 1;
+                const animation = item.animate(
+                    [
+                        { transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})` },
+                        { transform: 'translate(0px, 0px) scale(1, 1)' }
+                    ],
+                    {
+                        duration: ANIMATION_DURATION,
+                        easing: ANIMATION_EASING,
+                        fill: 'both'
+                    }
+                );
+
+                animation.onfinish = finalizeAnimation;
+                animation.oncancel = finalizeAnimation;
+                runningAnimations.push(animation);
             });
-        }
+        });
     }
 
     // ===== PANEL BALACALAŞ =====
     function minimizePanel() {
-        animateWaveLayoutChange(() => {
+        return animateWaveLayoutChange(() => {
             waveNav.classList.add('minimized');
         });
     }
 
     // ===== PANEL NORMALA QAYIT =====
     function restorePanel() {
-        animateWaveLayoutChange(() => {
+        return animateWaveLayoutChange(() => {
             waveNav.classList.remove('minimized');
         });
     }
@@ -204,48 +238,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== KLİK HADİSƏLƏRİ =====
     navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+        item.addEventListener('click', async function(e) {
             e.preventDefault();
             e.stopPropagation();
 
-            const target = this.dataset.target;
-            console.log('🔘 Klik:', target, 'Son klik:', lastClickedItem ? lastClickedItem.dataset.target : 'yoxdur');
+            if (isLayoutAnimating) return;
+            isLayoutAnimating = true;
 
-            // ƏGƏR EYNİ İTEM-Ə TƏKRAR KLİK OLUNUB SA
-            if(lastClickedItem === this) {
-                console.log('🔄 Eyni item-ə təkrar klik - panel geri qayıdır');
+            try {
+                const target = this.dataset.target;
+                console.log('🔘 Klik:', target, 'Son klik:', lastClickedItem ? lastClickedItem.dataset.target : 'yoxdur');
 
-                // Seçimi təmizlə
+                // ƏGƏR EYNİ İTEM-Ə TƏKRAR KLİK OLUNUB SA
+                if(lastClickedItem === this) {
+                    console.log('🔄 Eyni item-ə təkrar klik - panel geri qayıdır');
+
+                    // Seçimi təmizlə
+                    removeSelected();
+
+                    // Bütün bölmələri gizlət (sadəcə panel qalsın)
+                    hideAllSections();
+
+                    // Panel normala qayıt (mərkəzdə görünsün)
+                    await restorePanel();
+
+                    // Animasiya bitəndən sonra yenidən gizlət (digər script müdaxilələrinə qarşı)
+                    hideAllSections();
+
+                    // Son klikləni sıfırla
+                    lastClickedItem = null;
+                    activeItem = null;
+                    currentSection = 'new';
+
+                    return;
+                }
+
+                // ƏGƏR YENİ İTEM-Ə KLİK OLUNUB SA
+
+                // Seçimi idarə et
                 removeSelected();
+                this.classList.add('selected');
+                activeItem = this;
 
-                // Panel normala qayıt (mərkəzdə görünsün)
-                restorePanel();
+                // Bölməni göstər
+                showSection(target);
+                currentSection = target;
 
-                // Bütün bölmələri gizlət (sadəcə panel qalsın)
-                hideAllSections();
+                // Panel balacalaş (yuxarı qalxsın)
+                await minimizePanel();
 
-                // Son klikləni sıfırla
-                lastClickedItem = null;
-                activeItem = null;
-
-                return;
+                // Son klikləni yadda saxla
+                lastClickedItem = this;
+            } finally {
+                isLayoutAnimating = false;
             }
-
-            // ƏGƏR YENİ İTEM-Ə KLİK OLUNUB SA
-
-            // Seçimi idarə et
-            removeSelected();
-            this.classList.add('selected');
-            activeItem = this;
-
-            // Bölməni göstər
-            showSection(target);
-
-            // Panel balacalaş (yuxarı qalxsın)
-            minimizePanel();
-
-            // Son klikləni yadda saxla
-            lastClickedItem = this;
         });
     });
 
