@@ -232,8 +232,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== BÜTÜN PANELLERİ GÖSTER (sadece panel görünsün, bölmələr gizlənsin) =====
     function showOnlyPanel() {
         hideAllSections();
-        restorePanel();
         console.log('📌 Sadəcə panel göstərilir');
+        return restorePanel();
+    }
+
+    function resetNavSelectionState() {
+        removeSelected();
+        lastClickedItem = null;
+        activeItem = null;
+        currentSection = 'new';
     }
 
     // ===== KLİK HADİSƏLƏRİ =====
@@ -254,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('🔄 Eyni item-ə təkrar klik - panel geri qayıdır');
 
                     // Seçimi təmizlə
-                    removeSelected();
+                    resetNavSelectionState();
 
                     // Bütün bölmələri gizlət (sadəcə panel qalsın)
                     hideAllSections();
@@ -264,11 +271,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // Animasiya bitəndən sonra yenidən gizlət (digər script müdaxilələrinə qarşı)
                     hideAllSections();
-
-                    // Son klikləni sıfırla
-                    lastClickedItem = null;
-                    activeItem = null;
-                    currentSection = 'new';
 
                     return;
                 }
@@ -308,21 +310,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===== ESC DÜYMƏSİ =====
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', async e => {
         if(e.key === 'Escape') {
-            if(waveNav?.classList.contains('minimized')) {
+            if (isLayoutAnimating) return;
+            isLayoutAnimating = true;
+
+            try {
+                if(waveNav?.classList.contains('minimized')) {
                 // Balacalaşmışdırsa - normala qayıt
-                restorePanel();
+                await restorePanel();
                 if(activeItem) {
                     const target = activeItem.dataset.target;
                     showSection(target);
                 }
             } else {
                 // Normal vəziyyətdədirsə - sadəcə paneli göstər
-                showOnlyPanel();
-                removeSelected();
-                lastClickedItem = null;
-                activeItem = null;
+                await showOnlyPanel();
+                resetNavSelectionState();
+            }
+            } finally {
+                isLayoutAnimating = false;
             }
         }
     });
