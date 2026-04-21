@@ -28,7 +28,7 @@ body {
 }
 
 /* İlkin (2x3) vəziyyətdə paneli səhifədə şaquli mərkəzlə */
-body:has(.wave-nav-container:not(.minimized)) {
+body.wave-nav-restored {
     display: flex;
     flex-direction: column;
     justify-content: center;
